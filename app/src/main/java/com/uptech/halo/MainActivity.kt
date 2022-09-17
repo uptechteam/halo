@@ -1,11 +1,14 @@
 package com.uptech.halo
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.uptech.halo.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,18 +25,21 @@ class MainActivity : AppCompatActivity() {
     val account = GoogleSignIn.getLastSignedInAccount(this)
     if(account === null) {
       startActivity(Intent(this, LoginActivity::class.java))
-    } else {
-      initScreen()
     }
   }
 
-  private fun initScreen() {
-    binding.sigOut.setOnClickListener {
-      signOut()
-    }
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.main_menu, menu)
+    return true
+  }
 
-    binding.openShop.setOnClickListener {
-
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when(item.itemId) {
+      R.id.menu_main_setting -> {
+        signOut()
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
     }
   }
 

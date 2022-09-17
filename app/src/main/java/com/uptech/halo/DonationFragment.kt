@@ -13,6 +13,6 @@ class DonationFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-
+    return null
   }
 }
