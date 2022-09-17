@@ -3,12 +3,11 @@ package com.uptech.halo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.uptech.halo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-  private val login = registerForActivityResult(StartActivityForResult()) { }
 
   private lateinit var binding: ActivityMainBinding
 
@@ -22,7 +21,23 @@ class MainActivity : AppCompatActivity() {
     super.onStart()
     val account = GoogleSignIn.getLastSignedInAccount(this)
     if(account === null) {
-      login.launch(Intent(this, LoginActivity::class.java))
+      startActivity(Intent(this, LoginActivity::class.java))
+    } else {
+      initScreen()
+    }
+  }
+
+  private fun initScreen() {
+    binding.sigOut.setOnClickListener {
+      val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build()
+      val googleSignInClient = GoogleSignIn.getClient(this, gso)
+      googleSignInClient.signOut()
+        .addOnSuccessListener {
+          startActivity(Intent(this, LoginActivity::class.java))
+          finish()
+        }
     }
   }
 }

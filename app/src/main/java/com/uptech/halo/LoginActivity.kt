@@ -1,5 +1,6 @@
 package com.uptech.halo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
@@ -29,11 +30,13 @@ class LoginActivity : AppCompatActivity() {
               account.id!!,
               account.displayName!!,
               account.email!!,
+              account.photoUrl.toString(),
               0L
             )
           )
         }
       }
+      startActivity(Intent(this, MainActivity::class.java))
       finish()
     } catch (e: ApiException) {
       println("error")
