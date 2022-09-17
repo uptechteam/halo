@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initScreen() {
-    binding.sigOut.setOnClickListener {
+    /*binding.sigOut.setOnClickListener {
       signOut()
     }
 
     binding.openShop.setOnClickListener {
 
-    }
+    }*/
   }
 
 

@@ -5,9 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/donationsActivity">
 
-  <activity
+  <fragment
       android:id="@+id/donationsActivity"
-      android:name="com.uptech.halo.DonationsActivity"
+      android:name="com.uptech.halo.donation.DonationFragment"
       android:label="donations_fragment"
       tools:layout="@layout/donations_fragment" />
 </navigation>
