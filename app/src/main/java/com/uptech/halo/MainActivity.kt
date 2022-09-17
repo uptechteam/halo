@@ -29,15 +29,24 @@ class MainActivity : AppCompatActivity() {
 
   private fun initScreen() {
     binding.sigOut.setOnClickListener {
-      val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestEmail()
-        .build()
-      val googleSignInClient = GoogleSignIn.getClient(this, gso)
-      googleSignInClient.signOut()
-        .addOnSuccessListener {
-          startActivity(Intent(this, LoginActivity::class.java))
-          finish()
-        }
+      signOut()
     }
+
+    binding.openShop.setOnClickListener {
+
+    }
+  }
+
+
+  private fun signOut() {
+    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+      .requestEmail()
+      .build()
+    val googleSignInClient = GoogleSignIn.getClient(this, gso)
+    googleSignInClient.signOut()
+      .addOnSuccessListener {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+      }
   }
 }
