@@ -8,3 +8,8 @@ data class Lot(
   val collectorUser: CollectorUser,
   val fund: Fund
 )
+
+data class Donation(
+  val user: DonatorUser,
+  val lot: Lot
+)
