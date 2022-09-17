@@ -6,7 +6,7 @@
     app:startDestination="@id/donationsFragment">
 
   <fragment
-      android:id="@+id/donationsActivity"
+      android:id="@+id/donationsFragment"
       android:name="com.uptech.halo.donation.DonationFragment"
       android:label="donations_fragment"
       tools:layout="@layout/donations_fragment" />

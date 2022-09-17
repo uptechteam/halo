@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.uptech.halo.EdgesItemDecoration
 import com.uptech.halo.databinding.DonationsFragmentBinding
 
 class DonationFragment : Fragment() {
