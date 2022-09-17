@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/donationsActivity">
+    app:startDestination="@id/donationsFragment">
 
   <fragment
-      android:id="@+id/donationsActivity"
+      android:id="@+id/donationsFragment"
       android:name="com.uptech.halo.DonationFragment"
       android:label="donations_fragment"
       tools:layout="@layout/donations_fragment" />
+
+
+  <fragment
+      android:id="@+id/shopFragment"
+      android:name="com.uptech.halo.shop.ShopFragment"
+      android:label="shop_fragment"
+      tools:layout="@layout/fragment_shop"
+    />
 </navigation>

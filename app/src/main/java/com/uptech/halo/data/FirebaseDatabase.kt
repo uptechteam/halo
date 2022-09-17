@@ -20,6 +20,12 @@ object FirebaseDataSource {
   private val shopItemsRef: DatabaseReference = database.getReference("shop_items")
   private val fundsRef: DatabaseReference = database.getReference("funds")
 
+  suspend fun getDonatorUser(userId: String): DonatorUser = suspendCoroutine { cont ->
+    usersRef.child(userId).get().subscribe(cont) { dataSnapshot ->
+      dataSnapshot.getValue(DonatorUser::class.java)!!
+    }
+  }
+
   suspend fun saveUser(user: User): User = suspendCoroutine { cont ->
     usersRef.child(user.id).setValue(user).subscribe(cont, user)
   }
@@ -39,7 +45,15 @@ object FirebaseDataSource {
   suspend fun getAllShopItems(): List<ShopItem> = suspendCoroutine { cont ->
     shopItemsRef.get().subscribeList(cont) { dataSnapshot ->
       dataSnapshot.children.mapNotNull {
-        it.getValue(ServiceShopItem::class.java)
+        ServiceShopItem(
+          it.child("id").value as String,
+          it.child("title").value as String,
+          it.child("description").value as String,
+          it.child("price").value as Long,
+          it.child("author").getValue(PartnerUser::class.java)!!,
+          it.child("reward").getValue(InstructionReward::class.java)!!,
+          it.child("imageUrl").value as String
+        )
       }
     }
   }
@@ -63,6 +77,16 @@ object FirebaseDataSource {
   }
 
   fun <T> Task<DataSnapshot>.subscribeList(cont: Continuation<List<T>>, map: (DataSnapshot) -> List<T>) {
+    addOnSuccessListener { dataSnapshot ->
+      Log.e("APP", "onSuccess")
+      cont.resume(map.invoke(dataSnapshot))
+    }.addOnFailureListener {
+      Log.e("APP", "onError: $it")
+      cont.resumeWithException(it)
+    }
+  }
+
+  fun <T> Task<DataSnapshot>.subscribe(cont: Continuation<T>, map: (DataSnapshot) -> T) {
     addOnSuccessListener { dataSnapshot ->
       Log.e("APP", "onSuccess")
       cont.resume(map.invoke(dataSnapshot))

@@ -7,6 +7,7 @@ interface ShopItem {
   val price: Long
   val author: User
   val reward: Reward
+  val imageUrl: String
 }
 
 data class ServiceShopItem(
@@ -16,6 +17,7 @@ data class ServiceShopItem(
   override val price: Long,
   override val author: PartnerUser,
   override val reward: Reward,
+  override val imageUrl: String,
 ) : ShopItem {
   constructor() : this(
     "",
@@ -23,7 +25,8 @@ data class ServiceShopItem(
     "",
     0L,
     PartnerUser("", "", "", emptyList()),
-    InstructionReward("", "", "", emptyList())
+    InstructionReward("", "", "", emptyList()),
+    ""
   )
 }
 
