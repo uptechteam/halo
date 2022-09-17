@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/donationsFragment"
+        android:title="Donate"
+        android:icon="@drawable/ic_list"
+        />
+    <item
+        android:id="@+id/shopFragment"
+        android:title="Shop"
+        android:icon="@drawable/ic_store"/>
+</menu>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="122dp"
+        android:layout_height="152dp"
+        android:padding="12dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prize"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            app:layout_constraintBottom_toTopOf="@id/itemPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1200"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/itemImage"
+            app:layout_constraintEnd_toStartOf="@id/temBuy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/temBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buy"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/itemImage"
+            app:layout_constraintStart_toEndOf="@id/itemPrice"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
