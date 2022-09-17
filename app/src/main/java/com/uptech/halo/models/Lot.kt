@@ -6,10 +6,55 @@ data class Lot(
   val target: Long,
   val targetDescription: String,
   val collectorUser: CollectorUser,
-  val fund: Fund
-)
+  val fund: Fund,
+) {
+  constructor() : this(
+    "",
+    "",
+    0L,
+    "",
+    CollectorUser(
+      "",
+      "",
+      "",
+    ),
+    Fund(
+      "",
+      "",
+      "",
+      FundType.MONO_JAR
+    )
+  )
+}
 
 data class Donation(
   val user: DonatorUser,
   val lot: Lot
-)
+) {
+  constructor() : this(
+    DonatorUser(
+      "",
+      "",
+      "",
+      0L
+    ),
+    Lot(
+      "",
+      "",
+      0L,
+      "",
+      CollectorUser(
+        "",
+        "",
+        "",
+      ),
+      Fund(
+        "",
+        "",
+        "",
+        FundType.MONO_JAR
+
+      )
+    )
+  )
+}

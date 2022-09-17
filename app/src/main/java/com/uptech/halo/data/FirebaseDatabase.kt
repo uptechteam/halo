@@ -1,16 +1,15 @@
 package com.uptech.halo.data
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.uptech.halo.models.*
-import java.lang.Exception
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-
 
 object FirebaseDataSource {
 
@@ -48,32 +47,27 @@ object FirebaseDataSource {
   suspend fun getAllFunds(): List<Fund> = suspendCoroutine { cont ->
     fundsRef.get().subscribeList(cont) { dataSnapshot ->
       dataSnapshot.children.mapNotNull {
-        try {
-          it.getValue(CharityFund::class.java)
-        } catch (e: Exception) {
-          try {
-            it.getValue(MonoBank::class.java)
-          } catch (e: Exception) {
-            null
-          }
-        }
+        it.getValue(Fund::class.java)
       }
     }
   }
 
-
   fun <T> Task<Void>.subscribe(cont: Continuation<T>, res: T) {
     addOnSuccessListener {
+      Log.e("APP", "onSuccess")
       cont.resume(res)
     }.addOnFailureListener {
+      Log.e("APP", "onError: $it")
       cont.resumeWithException(it)
     }
   }
 
   fun <T> Task<DataSnapshot>.subscribeList(cont: Continuation<List<T>>, map: (DataSnapshot) -> List<T>) {
     addOnSuccessListener { dataSnapshot ->
+      Log.e("APP", "onSuccess")
       cont.resume(map.invoke(dataSnapshot))
     }.addOnFailureListener {
+      Log.e("APP", "onError: $it")
       cont.resumeWithException(it)
     }
   }
