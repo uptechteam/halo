@@ -11,9 +11,40 @@ data class DonatorUser(
   override val name: String,
   override val email: String,
   val balance: Long
-) : User
-data class CollectorUser(override val id: String, override val name: String, override val email: String) : User
-data class PartnerUser(override val id: String, override val name: String, override val email: String) : User
+) : User {
+  constructor() : this(
+    "",
+    "",
+    "",
+    0L
+  )
+}
+
+data class CollectorUser(
+  override val id: String,
+  override val name: String,
+  override val email: String,
+) : User {
+  constructor() : this(
+    "",
+    "",
+    "",
+  )
+}
+
+data class PartnerUser(
+  override val id: String,
+  override val name: String,
+  override val email: String,
+  val shopItems: List<ShopItem>
+) : User {
+  constructor() : this(
+    "",
+    "",
+    "",
+    emptyList()
+  )
+}
 
 
 

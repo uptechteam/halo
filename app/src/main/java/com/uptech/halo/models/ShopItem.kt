@@ -16,5 +16,14 @@ data class ServiceShopItem(
   override val price: Long,
   override val author: PartnerUser,
   override val reward: Reward,
-) : ShopItem
+) : ShopItem {
+  constructor() : this(
+    "",
+    "",
+    "",
+    0L,
+    PartnerUser("", "", "", emptyList()),
+    InstructionReward("", "", "", emptyList())
+  )
+}
 

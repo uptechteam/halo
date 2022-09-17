@@ -1,18 +1,15 @@
 package com.uptech.halo.models
 
-interface Fund {
-  val id: String
-  val name: String
+data class Fund(
+  val id: String,
+  val name: String,
+  val bankNumber: String,
+  val type: FundType
+) {
+  constructor() : this("", "", "", FundType.CHARITY_FUND)
 }
 
-data class CharityFund(
-  override val id: String,
-  override val name: String,
-  val iban: String
-) : Fund
-
-data class MonoBank(
-  override val id: String,
-  override val name: String,
-  val bankNumber: String
-) : Fund
+enum class FundType {
+  CHARITY_FUND,
+  MONO_JAR
+}
