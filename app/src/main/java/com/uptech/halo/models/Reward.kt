@@ -10,12 +10,12 @@ data class InstructionReward(
   override val id: String,
   override val name: String,
   override val description: String,
-  val stepsToReceive: List<String>
+  val stepsToReceive: String
 ) : Reward {
   constructor() : this(
     "",
     "",
     "",
-    emptyList()
+    ""
   )
 }

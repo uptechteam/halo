@@ -28,7 +28,7 @@ class ShopFragment : Fragment(R.layout.fragment_shop) {
     glide = Glide.with(this)
     adapter = ShopAdapter(mutableListOf(), glide)
 
-    binding.shopItemsRv.layoutManager = GridLayoutManager(requireContext(), 4)
+    binding.shopItemsRv.layoutManager = GridLayoutManager(requireContext(), 2)
     binding.shopItemsRv.adapter = adapter
 
     initData()

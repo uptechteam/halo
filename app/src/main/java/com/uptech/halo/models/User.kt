@@ -38,13 +38,11 @@ data class PartnerUser(
   override val id: String,
   override val name: String,
   override val email: String,
-  val shopItems: List<ShopItem>
 ) : User {
   constructor() : this(
     "",
     "",
     "",
-    emptyList()
   )
 }
 
