@@ -24,11 +24,11 @@ class DonationDetailsFragment : Fragment() {
       with(binding) {
         donate.setOnClickListener { /*TODO: add navigation login*/ }
         Glide.with(root)
-          .load(donation)
+          .load(donation.imageUrl)
           .into(image)
         header.text = donation.title
-        progress.progress = donation.progress.first
-        progress.max = donation.progress.second
+        progress.progress = donation.progress.first.toInt()
+        progress.max = donation.progress.second.toInt()
         description.text = donation.description
       }
     }

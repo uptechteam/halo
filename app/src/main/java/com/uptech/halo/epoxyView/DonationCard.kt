@@ -19,6 +19,9 @@ class DonationCard @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
   private val binding: DonationCardBinding =
     DonationCardBinding.inflate(LayoutInflater.from(context), this, true)
+      .apply {
+        root.setOnClickListener { onDonateClickListener?.invoke() }
+      }
 
   private var onDonateClickListener: (() -> Unit)? = null
 
