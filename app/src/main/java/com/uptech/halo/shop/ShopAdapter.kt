@@ -62,7 +62,9 @@ class ShopItemViewHolder(
         .fitCenter()
         .into(itemImage)
       val alpha = if (balance >= item.price) 1f else 0.5f
-      binding.itemPrice.alpha = alpha
+      itemPrice.alpha = alpha
+      progress.max = item.price.toInt()
+      progress.progress = balance.toInt()
     }
   }
 }

@@ -6,6 +6,16 @@
 
 
     <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_margin="24dp"
+        />
+
+    <ImageView
         android:id="@+id/congrats"
         android:layout_width="82dp"
         android:layout_height="82dp"

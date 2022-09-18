@@ -6,6 +6,7 @@ import android.text.method.LinkMovementMethod
 import android.text.method.MovementMethod
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.uptech.halo.R
 import com.uptech.halo.databinding.FragmentShopRewardBinding
 import com.uptech.halo.models.ServiceShopItem
@@ -27,6 +28,9 @@ class ShopRewardFragment : Fragment(R.layout.fragment_shop_reward) {
     binding.apply {
       stepsForReward.movementMethod = LinkMovementMethod()
       stepsForReward.text = Html.fromHtml(item.reward.description)
+      close.setOnClickListener {
+        findNavController().popBackStack()
+      }
     }
   }
 

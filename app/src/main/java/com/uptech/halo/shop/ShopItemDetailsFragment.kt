@@ -45,7 +45,7 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
       authorName.text = item.author.name
       authorCompany.text = item.author.company
       buy.text = "Redeem for ${item.price}"
-      binding.buy.setOnClickListener {
+      buy.setOnClickListener {
         lifecycleScope.launch(Dispatchers.IO) {
           FirebaseDataSource.updateDonatorUserBalance(requireContext(), -item.price)
           withContext(Dispatchers.Main) {
@@ -54,7 +54,7 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
           }
         }
       }
-      binding.share.setOnClickListener {
+      share.setOnClickListener {
         val url = "https://halo.uptech.com/reward/${item.id}"
         val sendIntent: Intent = Intent().apply {
           action = Intent.ACTION_SEND
@@ -64,6 +64,10 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+      }
+
+      close.setOnClickListener {
+        findNavController().popBackStack()
       }
     }
 
