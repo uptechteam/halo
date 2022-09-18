@@ -11,7 +11,7 @@ import com.uptech.halo.OffsetItemDecoration
 import com.uptech.halo.R
 import com.uptech.halo.data.FirebaseDataSource
 import com.uptech.halo.databinding.DonationsFragmentBinding
-import com.uptech.halo.donation.details.DonationDetailsFragment.Companion.DONATION
+import com.uptech.halo.donation.details.DonationDetailsFragment.Companion.DONATION_ID
 import com.uptech.halo.models.Lot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,18 +24,9 @@ class DonationFragment : Fragment() {
       findNavController().navigate(
         R.id.donationDetailsFragment,
         Bundle().apply {
-          putSerializable(
-            DONATION,
-            lots.first { lot -> lot.id == donationId }
-              .let { lot ->
-                com.uptech.halo.donation.details.Donation(
-                  lot.id,
-                  lot.imageUrl,
-                  lot.title,
-                  lot.progress to lot.target,
-                  lot.targetDescription
-                )
-              }
+          putString(
+            DONATION_ID,
+            donationId
           )
         }
       )

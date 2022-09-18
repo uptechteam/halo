@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.uptech.halo.R
+import com.uptech.halo.data.FirebaseDataSource
 import com.uptech.halo.databinding.DonationDetailsFragmentBinding
 import com.uptech.halo.payment.PaymentFragment.Companion.LOT_ID
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DonationDetailsFragment : Fragment() {
   private lateinit var binding: DonationDetailsFragmentBinding
@@ -23,31 +28,36 @@ class DonationDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    (arguments?.getSerializable(DONATION) as? Donation)?.let { donation ->
-      with(binding) {
-        donate.setOnClickListener {
-          findNavController().navigate(
-            R.id.payment,
-            Bundle().apply {
-              putString(LOT_ID, donation.id)
+    arguments?.getString(DONATION_ID)?.let { donationId ->
+      lifecycleScope.launch(Dispatchers.IO) {
+        FirebaseDataSource.getAllLots()
+          .first { lot -> lot.id == donationId }
+          .let { donation ->
+            withContext(Dispatchers.Main) {
+              with(binding) {
+                donate.setOnClickListener {
+                  findNavController().navigate(
+                    R.id.payment,
+                    Bundle().apply {
+                      putString(LOT_ID, donationId)
+                    }
+                  )
+                }
+                Glide.with(root)
+                  .load(donation.imageUrl)
+                  .into(image)
+                header.text = donation.title
+                progress.progress = donation.progress.toInt()
+                progress.max = donation.progress.toInt()
+                description.text = donation.targetDescription
+              }
             }
-          )
-        }
-        Glide.with(root)
-          .load(donation.imageUrl)
-          .into(image)
-        header.text = donation.title
-        progress.progress = donation.progress.first.toInt()
-        progress.max = donation.progress.second.toInt()
-        description.text = donation.description
+          }
       }
     }
   }
 
-
-
-
   companion object {
-    val DONATION = "donation"
+    val DONATION_ID = "donation_id"
   }
 }
