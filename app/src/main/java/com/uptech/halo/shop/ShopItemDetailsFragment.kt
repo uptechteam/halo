@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.shape.CornerFamily
 import com.uptech.halo.R
@@ -46,6 +47,10 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
       binding.buy.setOnClickListener {
         lifecycleScope.launch(Dispatchers.IO) {
           FirebaseDataSource.updateDonatorUserBalance(requireContext(), -item.price)
+          withContext(Dispatchers.Main) {
+            findNavController().navigate(R.id.action_shopItemDetailsFragment_to_shopRewardFragment,
+              ShopRewardFragment.newBundle(item))
+          }
         }
       }
     }
