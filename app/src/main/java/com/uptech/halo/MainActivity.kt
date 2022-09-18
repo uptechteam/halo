@@ -21,13 +21,9 @@ class MainActivity : AppCompatActivity() {
     val navController = navHostFragment.navController
     NavigationUI.setupWithNavController(binding.mainBar, navController)
     navController.addOnDestinationChangedListener { _, destination, _ ->
-      when(destination.id) {
-        R.id.shopItemDetailsFragment -> {
-          binding.mainBar.isVisible = false
-        }
-        else -> {
-          binding.mainBar.isVisible = true
-        }
+      binding.mainBar.isVisible = when(destination.id) {
+        R.id.donationsFragment, R.id.shopFragment -> true
+        else -> false
       }
     }
   }
