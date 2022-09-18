@@ -25,7 +25,7 @@ data class ServiceShopItem(
     "",
     0L,
     PartnerUser("", "", "", emptyList()),
-    InstructionReward("", "", "", emptyList()),
+    InstructionReward("", "", "", ""),
     ""
   )
 }
