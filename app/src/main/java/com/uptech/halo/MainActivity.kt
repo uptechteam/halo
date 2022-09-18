@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     NavigationUI.setupWithNavController(binding.mainBar, navController)
     navController.addOnDestinationChangedListener { _, destination, _ ->
       when(destination.id) {
-        R.id.shopItemDetailsFragment -> {
+        R.id.shopItemDetailsFragment, R.id.shopRewardFragment -> {
           binding.mainBar.isVisible = false
         }
         else -> {

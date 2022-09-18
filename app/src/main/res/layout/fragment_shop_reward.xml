@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="4dp"
 
-        android:text="Nice Job! To receive you reward please follow next steps"
+        android:text="Nice Job! To receive you reward please follow next steps:"
         android:textColor="@color/black"
         />
 
