@@ -42,6 +42,20 @@ object FirebaseDataSource {
     lotsRef.child(lot.id).setValue(lot).subscribe(cont, lot)
   }
 
+  suspend fun updateLotProgress(lotId: String, balance: Long) = coroutineScope {
+    val currentProgress = suspendCoroutine<Int?> { cont ->
+      lotsRef.child(lotId).child("progress").run {
+        get().subscribe(cont) { dataSnapshot ->
+          dataSnapshot.getValue(Int::class.java)
+        }
+      }
+    }
+    suspendCoroutine<Unit> { cont ->
+      lotsRef.child(lotId).child("progress")
+        .setValue((currentProgress ?: 0) + balance).subscribe(cont, Unit)
+    }
+  }
+
   suspend fun getAllLots(): List<Lot> = suspendCoroutine { cont ->
     lotsRef.get().subscribeList(cont) { dataSnapshot ->
       dataSnapshot.children.mapNotNull {

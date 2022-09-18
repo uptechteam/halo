@@ -6,16 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.RecyclerView.State
 
-class EdgesItemDecoration : ItemDecoration() {
+class OffsetItemDecoration : ItemDecoration() {
 
   override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
     super.getItemOffsets(outRect, view, parent, state)
-    outRect.right = outRect.right + 20f.dp().toInt()
-    outRect.left = outRect.left - 20f.dp().toInt()
-
     when(parent.getChildAdapterPosition(view)) {
-      0 -> outRect.top = outRect.top + 20f.dp().toInt()
-      parent.adapter?.itemCount -> outRect.bottom - 20f.dp().toInt()
+      0 -> {
+        outRect.top = outRect.top + 12f.dp().toInt()
+        outRect.bottom = outRect.bottom + 8f.dp().toInt()
+      }
+      parent.adapter?.itemCount -> outRect.bottom + 8f.dp().toInt()
+      else -> outRect.bottom + 16f.dp().toInt()
     }
   }
 }

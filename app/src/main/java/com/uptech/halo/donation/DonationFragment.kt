@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.uptech.halo.OffsetItemDecoration
 import com.uptech.halo.R
 import com.uptech.halo.data.FirebaseDataSource
 import com.uptech.halo.databinding.DonationsFragmentBinding
@@ -50,7 +51,10 @@ class DonationFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.donations.adapter = epoxyController.adapter
+    binding.donations.apply {
+      adapter = epoxyController.adapter
+      addItemDecoration(OffsetItemDecoration())
+    }
     lifecycleScope.launch(Dispatchers.IO) {
       FirebaseDataSource.getAllLots()
         .also { donations ->
