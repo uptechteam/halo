@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.uptech.halo.R
 import com.uptech.halo.databinding.DonationDetailsFragmentBinding
+import com.uptech.halo.payment.PaymentFragment.Companion.LOT_ID
 
 class DonationDetailsFragment : Fragment() {
   private lateinit var binding: DonationDetailsFragmentBinding
@@ -22,7 +25,14 @@ class DonationDetailsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     (arguments?.getSerializable(DONATION) as? Donation)?.let { donation ->
       with(binding) {
-        donate.setOnClickListener { /*TODO: add navigation login*/ }
+        donate.setOnClickListener {
+          findNavController().navigate(
+            R.id.payment,
+            Bundle().apply {
+              putString(LOT_ID, donation.id)
+            }
+          )
+        }
         Glide.with(root)
           .load(donation.imageUrl)
           .into(image)
@@ -33,6 +43,8 @@ class DonationDetailsFragment : Fragment() {
       }
     }
   }
+
+
 
 
   companion object {

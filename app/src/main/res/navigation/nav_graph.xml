@@ -27,7 +27,6 @@
       android:label="DonationDetailsFragment"
       tools:layout="@layout/donation_details_fragment" />
 
-
   <fragment
       android:id="@+id/shopItemDetailsFragment"
       android:name="com.uptech.halo.shop.ShopItemDetailsFragment"
@@ -57,4 +56,8 @@
         app:argType="com.uptech.halo.models.ServiceShopItem"
         />
   </fragment>
+
+  <fragment
+      android:id="@+id/payment"
+      android:name="com.uptech.halo.payment.PaymentFragment" />
 </navigation>
