@@ -2,11 +2,11 @@ package com.uptech.halo.models
 
 data class Lot(
   val id: String,
-  val title: CharSequence,
+  val title: String,
   val imageUrl: String,
   val target: Long,
   val progress: Long,
-  val targetDescription: CharSequence,
+  val targetDescription: String,
   val collectorUser: CollectorUser,
   val fund: Fund,
 ) {
