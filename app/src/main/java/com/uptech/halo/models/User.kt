@@ -15,14 +15,16 @@ data class DonatorUser(
   override val name: String,
   override val email: String,
   val icon: String,
-  val balance: Long
+  val balance: Long,
+  val firebaseToken: String
 ) : User {
   constructor() : this(
     "",
     "",
     "",
     "",
-    0L
+    0L,
+    ""
   )
 }
 

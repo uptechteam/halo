@@ -41,7 +41,8 @@ data class Donation(
       "",
       "",
       "",
-      0L
+      0L,
+      ""
     ),
     Lot(
       "",
