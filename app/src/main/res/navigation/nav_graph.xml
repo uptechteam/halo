@@ -11,17 +11,22 @@
       android:label="donations_fragment"
       tools:layout="@layout/donations_fragment" />
 
-
   <fragment
       android:id="@+id/shopFragment"
       android:name="com.uptech.halo.shop.ShopFragment"
       android:label="shop_fragment"
-      tools:layout="@layout/fragment_shop"
-    >
+      tools:layout="@layout/fragment_shop">
     <action
         android:id="@+id/action_shopFragment_to_shopItemDetailsFragment"
         app:destination="@id/shopItemDetailsFragment" />
   </fragment>
+
+  <fragment
+      android:id="@+id/donationDetailsFragment"
+      android:name="com.uptech.halo.donation.details.DonationDetailsFragment"
+      android:label="DonationDetailsFragment"
+      tools:layout="@layout/donation_details_fragment" />
+
 
   <fragment
       android:id="@+id/shopItemDetailsFragment"

@@ -3,7 +3,9 @@ package com.uptech.halo.models
 data class Lot(
   val id: String,
   val title: String,
+  val imageUrl: String,
   val target: Long,
+  val progress: Long,
   val targetDescription: String,
   val collectorUser: CollectorUser,
   val fund: Fund,
@@ -11,6 +13,8 @@ data class Lot(
   constructor() : this(
     "",
     "",
+    "",
+    0L,
     0L,
     "",
     CollectorUser(
@@ -22,7 +26,7 @@ data class Lot(
       "",
       "",
       "",
-      FundType.MONO_JAR
+      ""/*FundType.MONO_JAR*/
     )
   )
 }
@@ -42,6 +46,8 @@ data class Donation(
     Lot(
       "",
       "",
+      "",
+      0L,
       0L,
       "",
       CollectorUser(
@@ -53,7 +59,7 @@ data class Donation(
         "",
         "",
         "",
-        FundType.MONO_JAR
+        ""/*FundType.MONO_JAR*/
 
       )
     )
