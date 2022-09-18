@@ -53,6 +53,9 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
           }
         }
       }
+      binding.share.setOnClickListener {
+        val url = "https://"
+      }
     }
 
     lifecycleScope.launch(Dispatchers.IO) {
