@@ -52,6 +52,7 @@ class DonationDetailsFragment : Fragment() {
                 header.text = donation.title
                 progress.progress = donation.progress.toInt()
                 progress.max = donation.progress.toInt()
+                fundName.text = donation.collectorUser.name
                 description.text = donation.targetDescription
               }
             }
