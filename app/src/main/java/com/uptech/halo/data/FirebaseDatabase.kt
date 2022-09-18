@@ -1,6 +1,8 @@
 package com.uptech.halo.data
 
+import android.content.Context
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
@@ -20,7 +22,8 @@ object FirebaseDataSource {
   private val shopItemsRef: DatabaseReference = database.getReference("shop_items")
   private val fundsRef: DatabaseReference = database.getReference("funds")
 
-  suspend fun getDonatorUser(userId: String): DonatorUser = suspendCoroutine { cont ->
+  suspend fun getDonatorUser(context: Context): DonatorUser = suspendCoroutine { cont ->
+    val userId = GoogleSignIn.getLastSignedInAccount(context)?.id.toString()
     usersRef.child(userId).get().subscribe(cont) { dataSnapshot ->
       dataSnapshot.getValue(DonatorUser::class.java)!!
     }

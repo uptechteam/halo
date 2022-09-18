@@ -17,5 +17,21 @@
       android:name="com.uptech.halo.shop.ShopFragment"
       android:label="shop_fragment"
       tools:layout="@layout/fragment_shop"
-    />
+    >
+    <action
+        android:id="@+id/action_shopFragment_to_shopItemDetailsFragment"
+        app:destination="@id/shopItemDetailsFragment" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/shopItemDetailsFragment"
+      android:name="com.uptech.halo.shop.ShopItemDetailsFragment"
+      android:label="shop_item_details_fragment"
+      tools:layout="@layout/fragment_shop_item_details"
+      >
+    <argument
+        android:name="item"
+        app:argType="com.uptech.halo.models.ServiceShopItem"
+      />
+  </fragment>
 </navigation>

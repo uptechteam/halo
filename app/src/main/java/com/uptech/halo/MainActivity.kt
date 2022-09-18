@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -23,6 +25,16 @@ class MainActivity : AppCompatActivity() {
     val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
     val navController = navHostFragment.navController
     NavigationUI.setupWithNavController(binding.mainBar, navController)
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      when(destination.id) {
+        R.id.shopItemDetailsFragment -> {
+          binding.mainBar.isVisible = false
+        }
+        else -> {
+          binding.mainBar.isVisible = true
+        }
+      }
+    }
   }
 
   override fun onStart() {

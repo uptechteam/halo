@@ -1,11 +1,15 @@
 package com.uptech.halo.models
 
-interface Reward {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+interface Reward : Parcelable {
   val id: String
   val name: String
   val description: String
 }
 
+@Parcelize
 data class InstructionReward(
   override val id: String,
   override val name: String,
