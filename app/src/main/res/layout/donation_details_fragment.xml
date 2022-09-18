@@ -44,7 +44,6 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toBottomOf="@id/image"
         tools:text="Test header"
@@ -54,7 +53,6 @@
         android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintEnd_toEndOf="@id/end"
@@ -66,7 +64,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintTop_toBottomOf="@id/progress"
         tools:text="0 UAH"
@@ -77,10 +74,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="@id/end"
         app:layout_constraintTop_toBottomOf="@id/progress"
         tools:text="140 UAH"
+        />
+
+    <TextView
+        android:id="@+id/fund_name_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Fund:"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/achieved"
+        app:layout_constraintStart_toStartOf="@id/start"
+        app:layout_constraintEnd_toEndOf="@id/end"
         />
 
     <TextView
@@ -88,7 +96,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/achieved"
+        app:layout_constraintTop_toBottomOf="@id/fund_name_title"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintEnd_toEndOf="@id/end"
         />
