@@ -43,10 +43,11 @@ class MainActivity : AppCompatActivity() {
     }
     navController.addOnDestinationChangedListener { _, destination, _ ->
       binding.mainBar.isVisible = when(destination.id) {
-        R.id.donationsFragment, R.id.shopFragment -> true
+        R.id.donationsFragment, R.id.shopFragment, R.id.notificationsFragment -> true
         else -> false
       }
     }
+    binding.mainBar.getOrCreateBadge(R.id.notificationsFragment).number = 2
   }
 
   override fun onStart() {

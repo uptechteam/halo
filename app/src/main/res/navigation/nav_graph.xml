@@ -60,4 +60,8 @@
   <fragment
       android:id="@+id/payment"
       android:name="com.uptech.halo.payment.PaymentFragment" />
+  <fragment
+      android:id="@+id/notificationsFragment"
+      android:name="com.uptech.halo.notifications.NotificationsFragment"
+      android:label="NotificationsFragment" />
 </navigation>
