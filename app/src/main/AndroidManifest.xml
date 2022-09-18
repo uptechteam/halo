@@ -33,6 +33,7 @@
         <data android:scheme="https" />
         <data android:host="halo.uptech.com" />
         <data android:pathPattern="/donation.*" />
+        <data android:pathPattern="/reward.*" />
       </intent-filter>
     </activity>
   </application>

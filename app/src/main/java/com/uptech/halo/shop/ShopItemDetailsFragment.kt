@@ -1,5 +1,6 @@
 package com.uptech.halo.shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -54,7 +55,15 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
         }
       }
       binding.share.setOnClickListener {
-        val url = "https://"
+        val url = "https://halo.uptech.com/reward/${item.id}"
+        val sendIntent: Intent = Intent().apply {
+          action = Intent.ACTION_SEND
+          putExtra(Intent.EXTRA_TEXT, url)
+          type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
       }
     }
 
