@@ -35,32 +35,4 @@ class MainActivity : AppCompatActivity() {
       startActivity(Intent(this, LoginActivity::class.java))
     }
   }
-
-  /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.main_menu, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when(item.itemId) {
-      R.id.menu_main_setting -> {
-        signOut()
-        true
-      }
-      else -> super.onOptionsItemSelected(item)
-    }
-  }
-
-
-  private fun signOut() {
-    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-      .requestEmail()
-      .build()
-    val googleSignInClient = GoogleSignIn.getClient(this, gso)
-    googleSignInClient.signOut()
-      .addOnSuccessListener {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-      }
-  }*/
 }
