@@ -1,15 +1,15 @@
 package com.uptech.halo.data
 
+import android.content.Context
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.uptech.halo.models.*
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.coroutineScope
+import kotlin.coroutines.*
 
 object FirebaseDataSource {
 
@@ -20,9 +20,17 @@ object FirebaseDataSource {
   private val shopItemsRef: DatabaseReference = database.getReference("shop_items")
   private val fundsRef: DatabaseReference = database.getReference("funds")
 
-  suspend fun getDonatorUser(userId: String): DonatorUser = suspendCoroutine { cont ->
+  suspend fun getDonatorUser(context: Context): DonatorUser = suspendCoroutine { cont ->
+    val userId = GoogleSignIn.getLastSignedInAccount(context)?.id.toString()
     usersRef.child(userId).get().subscribe(cont) { dataSnapshot ->
       dataSnapshot.getValue(DonatorUser::class.java)!!
+    }
+  }
+
+  suspend fun updateDonatorUserBalance(context: Context, balance: Long): Unit = coroutineScope {
+    val user = getDonatorUser(context)
+    suspendCoroutine { cont ->
+      usersRef.child(user.id).child("balance").setValue(user.balance + balance).subscribe(cont, Unit)
     }
   }
 

@@ -1,6 +1,9 @@
 package com.uptech.halo.models
 
-interface ShopItem {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+interface ShopItem : Parcelable {
   val id: String
   val title: String
   val description: String
@@ -10,6 +13,7 @@ interface ShopItem {
   val imageUrl: String
 }
 
+@Parcelize
 data class ServiceShopItem(
   override val id: String,
   override val title: String,
@@ -24,7 +28,7 @@ data class ServiceShopItem(
     "",
     "",
     0L,
-    PartnerUser("", "", "", emptyList()),
+    PartnerUser("", "", "", "", ""),
     InstructionReward("", "", "", ""),
     ""
   )

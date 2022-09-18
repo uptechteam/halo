@@ -1,11 +1,15 @@
 package com.uptech.halo.models
 
-interface User {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+interface User : Parcelable {
   val id: String
   val name: String
   val email: String
 }
 
+@Parcelize
 data class DonatorUser(
   override val id: String,
   override val name: String,
@@ -22,6 +26,7 @@ data class DonatorUser(
   )
 }
 
+@Parcelize
 data class CollectorUser(
   override val id: String,
   override val name: String,
@@ -34,17 +39,20 @@ data class CollectorUser(
   )
 }
 
+@Parcelize
 data class PartnerUser(
   override val id: String,
   override val name: String,
   override val email: String,
-  val shopItems: List<ShopItem>
+  val imageUrl: String,
+  val company: String
 ) : User {
   constructor() : this(
     "",
     "",
     "",
-    emptyList()
+    "",
+    ""
   )
 }
 
