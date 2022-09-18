@@ -35,7 +35,10 @@
       />
     <action
         android:id="@+id/action_shopItemDetailsFragment_to_shopRewardFragment"
-        app:destination="@id/shopRewardFragment" />
+        app:destination="@id/shopRewardFragment"
+        app:popUpTo="@id/shopItemDetailsFragment"
+        app:popUpToInclusive="true"
+        />
   </fragment>
 
   <fragment
@@ -43,5 +46,10 @@
       android:name="com.uptech.halo.shop.ShopRewardFragment"
       android:label="ShopRewardFragment"
       tools:layout="@layout/fragment_shop_reward"
-      />
+      >
+    <argument
+        android:name="item"
+        app:argType="com.uptech.halo.models.ServiceShopItem"
+        />
+  </fragment>
 </navigation>
