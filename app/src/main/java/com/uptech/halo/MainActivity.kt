@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.uptech.halo.databinding.ActivityMainBinding
+import com.uptech.halo.donation.details.DonationDetailsFragment.Companion.DONATION_ID
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
     val navController = navHostFragment.navController
     NavigationUI.setupWithNavController(binding.mainBar, navController)
+    intent.data?.pathSegments?.last()?.let { donationId ->
+      navController.navigate(R.id.donationDetailsFragment, Bundle().apply { putString(DONATION_ID, donationId) })
+    }
     navController.addOnDestinationChangedListener { _, destination, _ ->
       binding.mainBar.isVisible = when(destination.id) {
         R.id.donationsFragment, R.id.shopFragment -> true
