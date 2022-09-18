@@ -28,6 +28,9 @@ class DonationDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    binding.close.setOnClickListener {
+      findNavController().popBackStack()
+    }
     arguments?.getString(DONATION_ID)?.let { donationId ->
       lifecycleScope.launch(Dispatchers.IO) {
         FirebaseDataSource.getAllLots()

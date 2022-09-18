@@ -26,6 +26,9 @@ class PaymentFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    binding.close.setOnClickListener {
+      findNavController().popBackStack()
+    }
     with(binding) {
       pay.setOnClickListener {
         if(!(numberInput.text.isNullOrBlank()
