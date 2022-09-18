@@ -33,5 +33,15 @@
         android:name="item"
         app:argType="com.uptech.halo.models.ServiceShopItem"
       />
+    <action
+        android:id="@+id/action_shopItemDetailsFragment_to_shopRewardFragment"
+        app:destination="@id/shopRewardFragment" />
   </fragment>
+
+  <fragment
+      android:id="@+id/shopRewardFragment"
+      android:name="com.uptech.halo.shop.ShopRewardFragment"
+      android:label="ShopRewardFragment"
+      tools:layout="@layout/fragment_shop_reward"
+      />
 </navigation>
