@@ -8,10 +8,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.uptech.halo.models.*
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.coroutineScope
+import kotlin.coroutines.*
 
 object FirebaseDataSource {
 
@@ -26,6 +24,13 @@ object FirebaseDataSource {
     val userId = GoogleSignIn.getLastSignedInAccount(context)?.id.toString()
     usersRef.child(userId).get().subscribe(cont) { dataSnapshot ->
       dataSnapshot.getValue(DonatorUser::class.java)!!
+    }
+  }
+
+  suspend fun updateDonatorUserBalance(context: Context, balance: Long): Unit = coroutineScope {
+    val user = getDonatorUser(context)
+    suspendCoroutine { cont ->
+      usersRef.child(user.id).child("balance").setValue(user.balance + balance).subscribe(cont, Unit)
     }
   }
 

@@ -42,6 +42,12 @@ class ShopItemDetailsFragment : Fragment(R.layout.fragment_shop_item_details) {
       productDescription.text = item.description
       authorName.text = item.author.name
       authorCompany.text = item.author.company
+      buy.text = "Redeem for ${item.price}"
+      binding.buy.setOnClickListener {
+        lifecycleScope.launch(Dispatchers.IO) {
+          FirebaseDataSource.updateDonatorUserBalance(requireContext(), -item.price)
+        }
+      }
     }
 
     lifecycleScope.launch(Dispatchers.IO) {
