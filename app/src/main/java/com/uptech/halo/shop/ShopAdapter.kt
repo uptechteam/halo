@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.shape.CornerFamily
 import com.uptech.halo.databinding.ItemShopBinding
+import com.uptech.halo.dp
 import com.uptech.halo.models.ShopItem
 
 class ShopAdapter(
@@ -57,6 +60,14 @@ class ShopItemViewHolder(
     binding.apply {
       itemName.text = item.title
       itemPrice.text = item.price.toString()
+      itemImage.setShapeAppearanceModel(
+        itemImage.getShapeAppearanceModel()
+          .toBuilder()
+          .setTopRightCorner(CornerFamily.ROUNDED, 5f.dp())
+          .setTopLeftCorner(CornerFamily.ROUNDED, 5f.dp())
+          .build()
+
+      )
       glide.load(item.imageUrl)
         .override(500, 758)
         .fitCenter()
