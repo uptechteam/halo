@@ -5,13 +5,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.uptech.halo.EdgesItemDecoration
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.uptech.halo.R
+import com.uptech.halo.data.FirebaseDataSource
 import com.uptech.halo.databinding.DonationsFragmentBinding
+import com.uptech.halo.donation.details.DonationDetailsFragment.Companion.DONATION
+import com.uptech.halo.models.Lot
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DonationFragment : Fragment() {
   private lateinit var binding: DonationsFragmentBinding
-  private val epoxyController: DonationsEpoxyController by lazy { DonationsEpoxyController() }
-
+  private lateinit var lots: List<Lot>
+  private val epoxyController: DonationsEpoxyController by lazy {
+    DonationsEpoxyController { donationId ->
+      findNavController().navigate(
+        R.id.donationDetailsFragment,
+        Bundle().apply {
+          putSerializable(
+            DONATION,
+            lots.first { lot -> lot.id == donationId }
+              .let { lot ->
+                com.uptech.halo.donation.details.Donation(
+                  lot.id,
+                  lot.imageUrl,
+                  lot.title,
+                  lot.progress to lot.target,
+                  lot.targetDescription
+                )
+              }
+          )
+        }
+      )
+    }
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -23,21 +51,18 @@ class DonationFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.donations.adapter = epoxyController.adapter
-    epoxyController.setData(
-      listOf(
+    lifecycleScope.launch(Dispatchers.IO) {
+      FirebaseDataSource.getAllLots()
+        .also { donations ->
+          lots = donations
+        }.map { lot ->
         Donation(
-          1,
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-          "Nokia",
-          50 to 100
-        ),
-        Donation(
-          2,
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-          "Nokia",
-          50 to 100
+          lot.id,
+          lot.imageUrl,
+          lot.title,
+          lot.progress to lot.target
         )
-      )
-    )
+      }.let { donations -> epoxyController.setData(donations) }
+    }
   }
 }

@@ -4,9 +4,9 @@ data class Fund(
   val id: String,
   val name: String,
   val bankNumber: String,
-  val type: FundType
+  val type: String/*FundType*/
 ) {
-  constructor() : this("", "", "", FundType.CHARITY_FUND)
+  constructor() : this("", "", "", "CHARITY_FUND"/*FundType.CHARITY_FUND*/)
 }
 
 enum class FundType {
