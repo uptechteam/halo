@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.airbnb.epoxy.ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT
@@ -19,6 +20,12 @@ class DonationCard @JvmOverloads constructor(
   private val binding: DonationCardBinding =
     DonationCardBinding.inflate(LayoutInflater.from(context), this, true)
 
+  private var onDonateClickListener: (() -> Unit)? = null
+
+  @CallbackProp fun setOnDonateClickListener(onClickListener: (() -> Unit)?) {
+    this.onDonateClickListener = onClickListener
+  }
+
   @ModelProp fun setImage(url: String) =
     Glide.with(binding.root)
       .load(url)
@@ -28,10 +35,10 @@ class DonationCard @JvmOverloads constructor(
     binding.header.text = title
   }
 
-  @ModelProp fun setProgress(progress: Pair<Int, Int>)  {
+  @ModelProp fun setProgress(progress: Pair<Long, Long>)  {
     val (progress, max) = progress
-      binding.progress.max = max
-      binding.progress.progress = progress
+      binding.progress.max = max.toInt()
+      binding.progress.progress = progress.toInt()
       binding.achieved.text = "$progress UAH"
       binding.target.text = "$max UAH"
   }
